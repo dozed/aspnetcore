@@ -246,6 +246,10 @@ fi
 # Run restore by default unless --no-restore or --no-build was specified.
 [ -z "$run_restore" ] && run_restore=true
 
+if [ "$ci" = true ]; then
+    run_restore=true
+fi
+
 msbuild_args[${#msbuild_args[*]}]="-p:Restore=$run_restore"
 msbuild_args[${#msbuild_args[*]}]="-p:Build=$run_build"
 if [ "$run_build" = false ]; then

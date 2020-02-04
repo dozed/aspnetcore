@@ -233,6 +233,11 @@ $RunRestore = if ($NoRestore) { $false }
     elseif ($NoBuild) { $false }
     else { $true }
 
+# Workaround for preview SDK
+if ($CI) {
+   $RunRestore = $true
+}
+
 # Target selection
 $MSBuildArguments += "/p:Restore=$RunRestore"
 $MSBuildArguments += "/p:Build=$RunBuild"
